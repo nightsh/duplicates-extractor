@@ -1,0 +1,21 @@
+{
+    "name": "nightsh/duplicates-extractor",
+    "description": "Check duplicates in CSV files",
+    "require": {
+        "aura/cli": "^2.1",
+        "league/csv": "^8.0"
+    },
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "Victor Nițu",
+            "email": "victor@thesponge.eu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Nightsh\\DuplicatesExtractor\\": "src/"
+        }
+    }
+}
