@@ -30,6 +30,7 @@ $options = [
     'h',       // call for help
     'q',       // quiet switch
     'i:',      // (required) input file path
+    'd::',      // (optional) helper file path
     'o::'      // (optional) output file path; output to STDOUT otherwise
 ];
 
@@ -52,6 +53,15 @@ if ($getopt->get('-i')) {
     die("No input file specified." . PHP_EOL);
 }
 
+if ($getopt->get('-d')) {
+    if (file_exists($getopt->get('-d'))) {
+        $helper_file = $getopt->get('-d');
+    } elseif (is_dir($getopt->get('-d'))) {
+        die("You gave me a directory, WTF?!?!?!" . PHP_EOL);
+    } else {
+        die("Specified file does not exist!" . PHP_EOL);
+    }
+} 
 
 if ($getopt->get('-o')) {
     if (file_exists($getopt->get('-i'))) {
@@ -71,5 +81,10 @@ if ($getopt->get('-o')) {
 /**********[ Real business from now on ]**********/
 
 // Be aware there's currently no type checking. Use on your own risk!
-$parser = new Parser\CSV($input);
+$source = new Parser\CSV($input);
+$helper = new Parser\DuplicateHelper($helper_file, 'doc_no');
 
+var_dump($helper->get_header());
+var_dump($helper->next_id());
+var_dump($helper->next_id());
+var_dump($helper->next_id());

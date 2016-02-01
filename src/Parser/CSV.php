@@ -12,7 +12,8 @@ class CSV {
         $this->csv = Reader::createFromPath($this->input);
     }
 
-    public function get_headers() {
+    public function get_header() {
         return $this->headers = $this->csv->fetchOne();
     }
+
 }
