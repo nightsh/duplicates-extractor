@@ -3,7 +3,8 @@
     "description": "Check duplicates in CSV files",
     "require": {
         "aura/cli": "^2.1",
-        "league/csv": "^8.0"
+        "league/csv": "^8.0",
+        "nesbot/carbon": "^1.21"
     },
     "license": "WTFPL",
     "authors": [
