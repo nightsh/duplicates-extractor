@@ -2,6 +2,7 @@
 
 require_once( __DIR__ . '/vendor/autoload.php' );
 
+use Carbon\Carbon;
 use League\Csv\Reader;
 
 use Aura\Cli\CliFactory;
@@ -84,7 +85,17 @@ if ($getopt->get('-o')) {
 $source = new Parser\CSV($input);
 $helper = new Parser\DuplicateHelper($helper_file, 'doc_no');
 
-var_dump($helper->get_header());
-var_dump($helper->next_id());
-var_dump($helper->next_id());
-var_dump($helper->next_id());
+for($i=0; $i<10; $i++) {
+    $id = $helper->next_id();
+    echo "Processing ", $id, " (", Carbon::now()->toDateTimeString(), ")", PHP_EOL;
+
+    $source->csv->fetchAll( function($row) use ($helper, $id) {
+        if ($row[$helper->index()] == $id) {
+            echo $row[1], PHP_EOL;
+            return $row;
+        } else {
+            return false;
+        }
+    } );
+}
+

@@ -24,10 +24,13 @@ class DuplicateHelper extends CSV {
     private function get_offset() {
         $header = $this->get_header();
 
-        return
-        $this->helper->index = array_search(
-            $this->helper->name, array_keys($header)
+        return $this->helper->index = array_search(
+            $this->helper->name, $header
         );
+    }
+
+    public function index() {
+        return $this->helper->index;
     }
 
     public function next_id() {
